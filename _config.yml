@@ -10,10 +10,10 @@
 carpentry: "bst"
 
 # Overall title for pages.
-title: "Running Molecular Dynamics on Alliance clusters with AMBER"
+title: "Running Molecular Dynamics on Exascale AI/HPC Mahidol University  clusters with AMBER"
 
 # Email address, no mailto:
-email: "support@tech.alliancecan.ca?Subject=[MolModSim]+Molecular+Dynamics+workshop"
+email: "snit.san@mahidol.ac.th?Subject=[MolModSim]+Molecular+Dynamics+workshop"
 
 # Life cycle stage of the lesson
 # See this page for more details: https://cdh.carpentries.org/the-lesson-life-cycle.html
@@ -34,8 +34,8 @@ repository: <USERNAME>/<PROJECT>
 
 # Sites.
 amy_site: "https://amy.carpentries.org/"
-bst_site: "https://docs.alliancecan.ca/wiki/Biomolecular_simulation"
-cc_site: "https://www.alliancecan.ca"
+bst_site: "https://ai-hpc-mu.github.io/document/"
+cc_site: "https://www.mahidol.ac.th"
 carpentries_github: "https://github.com/carpentries"
 carpentries_pages: "https://carpentries.github.io"
 carpentries_site: "https://carpentries.org/"
