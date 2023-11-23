@@ -9,8 +9,7 @@ from subprocess import Popen, PIPE
 import re
 from argparse import ArgumentParser
 
-from util import require
-from reporter import Reporter
+from util import Reporter, require
 
 # Import this way to produce a more useful error message.
 try:

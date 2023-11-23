@@ -12,7 +12,7 @@
 [cran-stringr]: https://cran.r-project.org/package=stringr
 [dc-lessons]: http://www.datacarpentry.org/lessons/
 [email]: mailto:team@carpentries.org
-[github-importer]: https://import2.github.com/
+[github-importer]: https://import.github.com/
 [importer]: https://github.com/new/import
 [jekyll-collection]: https://jekyllrb.com/docs/collections/
 [jekyll-install]: https://jekyllrb.com/docs/installation/
@@ -21,10 +21,13 @@
 [jupyter]: https://jupyter.org/
 [kramdown]: https://kramdown.gettalong.org/
 [lc-lessons]: https://librarycarpentry.org/lessons/
+[lesson-aio]: {{ relative_root_path }}{% link aio.md %}
 [lesson-coc]: {{ relative_root_path }}{% link CODE_OF_CONDUCT.md %}
 [lesson-example]: https://carpentries.github.io/lesson-example/
 [lesson-license]: {{ relative_root_path }}{% link LICENSE.md %}
 [lesson-mainpage]: {{ relative_root_path }}{% link index.md %}
+[lesson-reference]: {{ relative_root_path }}{% link reference.md %}
+[lesson-setup]: {{ relative_root_path }}{% link setup.md %}
 [mit-license]: https://opensource.org/licenses/mit-license.html
 [morea]: https://morea-framework.github.io/
 [numfocus]: https://numfocus.org/

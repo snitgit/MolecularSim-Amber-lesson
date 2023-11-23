@@ -1,113 +1,185 @@
 ---
 layout: page
-title: Background and Design
+title: "Lesson Design"
 permalink: /design/
 ---
-There are a few things you need to know in order to understand why we
-do things the way we do.  Some of them are specific to GitHub, rather
-than Git itself.
 
-1.  Git uses the term "clone" to mean "a copy of a repository".
-    GitHub uses the term "fork" to mean, "a copy of a GitHub-hosted
-    repo that is also hosted on GitHub", and the term "clone" to mean
-    "a copy of a GitHub-hosted repo that's located on someone else's
-    machine".  In both cases, the duplicate has a remote called
-    `origin` that points to the original repo; other remotes can be
-    added manually.
+> ## Help Wanted
+> {:.no_toc}
+>
+> **We are filling in the exercises [below](#stage-3-learning-plan)
+> in order to make the lesson plan more concrete.
+> Contributions (both in the form of pull requests with filled-in exercises,
+> and comments on specific exercises, ordering, and timings) are greatly appreciated.**
+{: .callout}
 
-2.  A user on GitHub can only have one fork of a particular repo.
-    This is a problem for us because an instructor may be involved in
-    several workshops, each of which has its own website repo. To avoid
-    this issue, we use the template functionality (you could also use the
-    `import.github.com` functionality).
+## Motivation for the BST-Workshop series
 
-3.  If a repository has a file called `README.md` in its root
-    directory, GitHub displays the contents of that file on the
-    repository's home page.
+The motivation behind this 3-part workshop/tutorial series is to give new grad 
+students an introduction into preparing, running and analyzing MD simulations.
+The series is not meant to be a replacement for university courses in thermodynamics 
+and statistical thermodynamics.  Instead this series takes an applied approach
+and touches on theory only as much it is necessary to aid choosing reasonable
+simulation parameters.
 
-4.  If a repository has a branch called `gh-pages` (which stands for
-    "GitHub pages"), then GitHub uses the HTML and Markdown files in
-    that branch to create a website for the repository.  If the
-    repository's URL is `http://github.com/darwin/finches`, the URL
-    for the website is `http://darwin.github.io/finches`.
+The **first lesson** is a hands-on example on how to use GROMACS to prepare and 
+submit a MD simulation.  There are numerous good GROMACS tutorials available and 
+maybe one of them could be adapted for this.  In addition to general instructions 
+and commands, there should be specific instructions on how to do this on Compute 
+Canada clusters.  As in Software Carpentry lessons, certain steps should be 
+implemented as exercises for the learner - the correct answer can be hidden in 
+an answer box.  
+Theory should be skipped over as much as possible and should be covered in the 
+second module.  
+This lesson could be adapted for other MD-codes (e.g. NAMD) as well.
 
-5.  If an HTML or Markdown file has a header consisting of three
-    dashes, some data about the page, and three more dashes:
 
-    ```yaml
-    ---
-    key: value
-    other_key: other_value
-    ---
-    content of the page
-    ```
+The **second lesson** is a small theory review to remind the learners of important 
+concepts and how they influence the choice of simulation parameters.  The aim is
+that people can avoid pit-falls and misunderstandings that are commonly made
+by novice MD users. Topics to cover are Periodic Boundary Conditions (and why 
+there is no "outside" with a periodic box), thermostats/barostats, cut-offs, etc.  
+This should be no substitute for a formal course in statistical thermodynamics 
+but should help users make more informed choices of simulation settings/parameters.
 
-    then GitHub doesn't just copy the file over verbatim.  Instead, it
-    runs the file through a translator called [Jekyll][jekyll] that
-    looks for specially-formatted commands embedded in the file and
-    uses them to fill in the page.
 
-6.  Commands can be embedded in the body of a page.  One is
-    `{% raw %}{% include something.html %}{% endraw %}`, which tells
-    Jekyll to copy the contents of `something.html` into the file
-    being translated; this is used to create standard headers and
-    footers for pages.  Another is `{% raw %}{{variable}}{% endraw %}`: when Jekyll sees
-    this, it replaces it with the value of `variable`.  This is used
-    to insert things like a contact email address and the URL for our
-    Twitter account.
+The **third lesson** is again a hands-on tutorial to use Python and the Python 
+packages [MDAnalysis](https://www,mdanalysis.org), [MDtraj](http://mdtraj.org/),
+and [NGLview](http://nglviewer.org/nglview/latest/) to write their own analysis 
+tools.  While, for example GROMACS, comes with a very large number of analysis 
+tools out-of-the-box, users often limit themselves to those tools and the options
+and variations that they offer.  The above frameworks make it very easy to read 
+MD-trajectories in different formats and get access to the coordinates and come 
+up with fully customized analysis methods.
 
-7.  Jekyll gets variables from two places: a file called `_config.yml`
-    located in the repo's root directory, and the header of each
-    individual page.  Variables from `_config.yml` are put in an
-    object called `site`, and referred to as `site.variable`, so that
-    (for example) `{% raw %}{{site.swc_site}}{% endraw %}` in a page is replaced by the URL
-    of the main Software Carpentry web site ({{site.swc_site}}).  Variables from the
-    page's header are put in an object called `page`, and referred to
-    as `page.variable`, so if a page's header defines a variable
-    called `venue`, `{% raw %}{{page.venue}}{% endraw %}` is replaced by "Euphoric State
-    University" (or whatever value the variable has).
 
-8.  If a page uses `{% raw %}{% include something.html %}{% endraw %}`
-    to include a snippet of HTML, Jekyll looks in a directory called
-    `_includes` to find `something.html`.  It always looks there, and
-    nowhere else, so anything we want people to be able to include in
-    their pages has to be stored in `_includes`.
+The mentioned lessons *one* and *three* are currently put on hold and are subject
+to be created at a later time.  In the meantime we can recommend to work through
+online tutorials that are already available such as:
+* http://www.mdtutorials.com/ 
+* https://www.mdanalysis.org/MDAnalysisTutorial/
 
-9.  A repository can have another special directory called `_layouts`.
-    If a page like `index.html` has a variable called `layout`, and
-    that variable's value is `standard.html`, Jekyll loads the file
-    `_layouts/standard.html` and copies the content of `index.html`
-    into it, then expands the result.  This is used to give the pages
-    in a site a uniform appearance.
-    We have created two layouts for workshop pages:
+This module here will implement the *second lesson* focusing on theory and giving
+guidance on choosing good parameters for MD-Simulations.
 
-    * `workshop.html` is used for workshops' home pages, and is the
-      layout for the `index.html` page in your repo's root directory.
-      That `index.html` page's header must define several variables as
-      specified in the the customization instructions in order for
-      your workshop to be included in our main website.
 
-    * `page.html` is used for any other pages you want to create.
-      **Note:** if you create extra pages, you *must* edit the values
-      in the top section of `_config.yml` as described in
-      [the lesson template documentation]({{ site.example_site }}).
+## Process Used
 
-## Extra Directories
+* 
 
-This workshop template shares resources with the template used for
-Carpentry lessons.  As a result, your workshop website's repository
-contains directories that most workshops don't need, but which can be
-used to store extra material when necessary:
+## Stage 1: Assumptions
 
-*   `_extras/`: extra pages (like this one).
-*   `_episodes/`: lesson episodes (which workshops usually don't have).
-*   `_episodes_rmd/`: R Markdown lesson episodes (if any).
-*   `code/`: for code samples.
-*   `data/`: for data files.
-*   `fig/`: for figures and other images.
-*   `files/`: for miscellaneous files.
+*   Audience
+    * Graduate students in with some background in chemistry (e.g. Biochemistry, 
+      Chemical Engineering, Condensed Matter Physics or similar),
+      who are beginning a research project with Molecular Dynamics.
+    * Had a course in thermodynamics and possibly statistical thermodynamics.
+    * Have either attended lesson 1 of this series or worked through a MD 
+      tutorial or two.  
+      At this point they are likely overwhelmed by the number of simulation 
+      parameters that need to be set and need some practical guidance.
 
-For more information on these, please see [the documentation for the
-lesson template]({{ site.example_site }}).
+*   Constraints
+    * A half day or maybe full day?
+    * Difficult to make this interactive.  
+        * One could have the students run simulations with bad settings, 
+          which then either are unstable and fail, result on obviously bad 
+          results or compare observables with simulations with better settings.
+        * This however will take a lot longer than a traditional lecture.
+        * One could prepare pairs of simulations with bad and good settings
+          and compare the results.
 
-[jekyll]: https://jekyllrb.com/
+*   Motivating Example
+    * 
+
+*   Data
+    * 
+
+## Stage 2: Desired Results
+
+### Topics to cover 
+(in no particular order; might need to be pruned)
+
+* System preparation
+    * complete input structure (check for missing atoms/residues)
+    * balance charges (the world does not have net-charge)
+    * non-integer charges point to broken topology
+    * interfaces (?)
+    * membranes (?)
+
+* Periodic Boundary Conditions
+    * there is no "outside of the box" with PBC
+    * minimum image convention
+    * cut-off restrictions
+
+* Force fields and Cut-Offs
+    * Genealogy of common Forcefields (?)
+    * bonded interactions
+    * non-bonded interactions
+        * cut-offs
+        * Electrostatics
+        * long range interactions (PME)
+    * Water models (?)
+
+* The Global MD algorithm
+    * choice of time steps
+    * applying constraints
+    * (but probably not going into differences between Leap-Frog and Velocity-Verlet)
+
+* Phases of MD Workflow
+    * energy minimization
+    * relaxation / position restrained MD
+    * equilibration
+    * production MD
+
+* Thermostats/Barostats
+    * Maxwell-Boltzmann distribution
+    * Why use different thermo-/barostats for equilibration and production.
+        * Berendsen 's algorithms are suitable for equilibration (exponential 
+          approach to target temperature/pressure) but result in a non-physical
+          ensemble.
+        * Parrinello-Rahman and Nose-Hoover are suitable for production MD
+          (correct physical ensemble), but approach the target temperature/pressure
+          in a dampened oscillation, which might be unstable and takes much longer.
+    * Size of temperature coupling groups
+    * Flying ice cube -> resetting COM-movement
+    * Hot-Solvent/Cold-Solute -> tcoupl groups
+    * Literature:
+        * [Basconi2013]({{ page.root }}/reference.html#Basconi-2013)
+        * [Wong-ekkabut2016]({{ page.root }}/reference.html#Wong-ekkabut-2016)
+
+* Parallelization/Performance
+    * Particle decomposition vs. Domain Decomposition
+    * MPI / OpenMP / GPU
+    * PME nodes /  shifting of real-space/PME cutoff
+    * Load balancing
+    * Literature:
+        * [Larsson2011]({{ page.root }}/reference.html#Larsson-2011)
+
+### Questions
+
+How do I...
+
+  * 
+
+### Skills
+
+I can...
+
+  * 
+
+### Concepts
+
+I know...
+
+  * 
+
+## Stage 3: Learning Plan
+
+### Summative Assessment
+
+*   Midpoint: 
+    * show input-files with mistakes and let users spot them
+*   Final:
+
+### Lesson 1:

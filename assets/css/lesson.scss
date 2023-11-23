@@ -14,6 +14,13 @@ $color-warning:     #cda01d !default;
 $color-output:      #303030 !default;
 $color-source:      #360084 !default;
 
+// begin: added MolModSim
+// define font color
+$color-leap:        #b13449 !default;
+$color-vmd:         #208f61 !default;
+$color-python:      #031ba1 !default;
+// end: added MolModSim
+
 // blockquotes
 $color-callout:     #f4fd9c !default;
 $color-caution:     #cf000e !default;
@@ -32,10 +39,10 @@ $color-testimonial: #fc8dc1 !default;
 
 @mixin cdSetup($color) {
     color: $color;
-    border: solid 0.065em $color;
-    border-left: solid 0.325em $color;
-    margin: 0.975em 0.325em 0.65em 0;
-    border-radius: 0.26em 0 0 0.26em;
+    border: solid 1px $color;
+    border-left: solid 5px $color;
+    margin: 15px 5px 10px 0;
+    border-radius: 4px 0 0 4px;
 }
 
 // Generic setup. Has to come before .error, .warning, and .output
@@ -46,6 +53,14 @@ div.error   { @include cdSetup($color-error); }
 div.warning { @include cdSetup($color-warning); }
 div.output  { @include cdSetup($color-output); }
 
+// begin: added by MolModSim
+// Generic setup of code boxes
+div.vmd             { @include cdSetup($color-vmd); }
+div.leap            { @include cdSetup($color-leap); }
+div.cpptraj         { @include cdSetup($color-leap); }
+div.file-content    { @include cdSetup($color-output); }
+// end: added MolModSim
+
 div.error::before,
 div.warning:before,
 div.output::before,
@@ -54,7 +69,7 @@ div[class^='language-']::before {
     background-color: #f2eff6;
     display: block;
     font-weight: bold;
-    padding: 0.325em 0.65em;
+    padding: 5px 10px;
 }
 
 div[class^='language-']::before,
@@ -64,49 +79,51 @@ div.error::before  { background-color: #ffebe6; content: "Error"; }
 div.warning:before { background-color: #f8f4e8; content:" Warning"; }
 div.output::before { background-color: #efefef; content: "Output"; }
 
-div.language-basic::before    { content: "Basic"; }
-div.language-bash::before     { content: "Bash"; }
-div.language-c::before        { content: "C"; }
-div.language-chapel::before   { content: "Chapel"; }
-div.language-cmake::before    { content: "CMake"; }
-div.language-cpp::before      { content: "C++"; }
-div.language-cuda::before     { content: "Cuda"; }
-div.language-d::before        { content: "D"; }
-div.language-fortran::before  { content: "Fortran"; }
-div.language-go::before       { content: "Go"; }
-div.language-html::before     { content: "HTML"; }
-div.language-java::before     { content: "Java"; }
-div.language-julia::before    { content: "Julia"; }
-div.language-kotlin::before   { content: "Kotlin"; }
-div.language-lua::before      { content: "Lua"; }
-div.language-make::before     { content: "Make"; }
-div.language-matlab::before   { content: "MATLAB"; }
-div.language-opencl::before   { content: "OpenCL"; }
-div.language-perl::before     { content: "Perl"; }
-div.language-python::before   { content: "Python"; }
-div.language-r::before        { content: "R"; }
-div.language-ruby::before     { content: "Ruby"; }
-div.language-rust::before     { content: "Rust"; }
-div.language-scala::before    { content: "Scala"; }
-div.language-sql::before      { content: "SQL"; }
-div.language-vulkan::before   { content: "Vulkan"; }
+div.language-bash::before    { content: "Bash"; }
+div.language-c::before       { content: "C"; }
+div.language-fortran::before { content: "Fortran"; }
+div.language-cmake::before   { content: "CMake"; }
+div.language-cpp::before     { content: "C++"; }
+div.language-html::before    { content: "HTML"; }
+div.language-make::before    { content: "Make"; }
+div.language-matlab::before  { content: "MATLAB"; }
+div.language-python::before  { content: "Python"; }
+div.language-r::before       { content: "R"; }
+div.language-sql::before     { content: "SQL"; }
+
+// begin: added MolModSim
+// set code-box-title
+div.cpptraj::before         { content: "CppTraj"; }
+div.file-content::before    { content: "File content"; }
+div.leap::before            { content: "LEaP"; }
+div.vmd::before             { content: "VMD"; }
+// set code-box-background
+div.file-content,
+div.file-content::before   { background-color: #efefef; }
+div.cpptraj,
+div.cpptraj::before        { background-color: #f7f0f0; }
+div.leap,
+div.leap::before           { background-color: #f5eded; } 
+div.vmd,
+div.vmd::before            { background-color: #ecf0ee; }
+// end: added MolModSim
 
 // Tab panels are used on Setup pages to show instructions for different Operating Systems
 .tab-pane {
-  border: solid 0.065em #ddd; // #ddd == @nav-tabs-active-link-hover-border-color
+  border: solid 1px #ddd; // #ddd == @nav-tabs-active-link-hover-border-color
   border-top: none;
-  padding: 1.3em 1.3em 0.65em 1.3em;
-  border-radius: 0 0 0.26em 0.26em; // 0.26em == @border-radius-base
+  padding: 20px 20px 10px 20px;
+  border-radius: 0 0 4px 4px; // 4px == @border-radius-base
 }
 
 // Stripe above tab panels where OS tabs are shown
 ul.nav.nav-tabs {
   background: #E1E1E1;
-  border-radius: 0.26em 0.26em 0 0;  // 0.26em == @border-radius-base
+  border-radius: 4px 4px 0 0;  // 4px == @border-radius-base
 }
 
-// adjust line height of links so that clickable area (of OS tabs) is 2.86em high
-ul.nav.nav-tabs li a { line-height: 1.56em; } // or 1.714285716
+// adjust line height of links so that clickable area (of OS tabs) is 44px high
+ul.nav.nav-tabs li a { line-height: 24px; } // or 1.714285716
 
 // This color provides better contrast ratio on most backgrounds used on Carpentries websites
 // 9.24 on FFFFFF: https://webaim.org/resources/contrastchecker/?fcolor=204A6F&bcolor=FFFFFF&api (body)
@@ -118,11 +135,11 @@ a { color: #204A6F; }
 .yt-wrapper2 { max-width: 100%; margin: 0 auto; }
 
 // Use full width on small displays
-@media only screen and (max-width: 39em) { .yt-wrapper2 { max-width: 100%; } }
+@media only screen and (max-width: 600px) { .yt-wrapper2 { max-width: 100%; } }
 
 .yt-wrapper {
     height: 0;
-    margin-top: 0.65em;
+    margin-top: 10px;
     padding-bottom: 56.25%;
     position: relative;
     width: 100%;
@@ -140,7 +157,7 @@ a { color: #204A6F; }
 // Specialized blockquote environments for learning objectives, callouts, etc.
 //----------------------------------------
 
-$codeblock-padding: 0.325em !default;
+$codeblock-padding: 5px !default;
 
 @mixin bkSetup($color, $glyph) {
 
@@ -148,19 +165,19 @@ $codeblock-padding: 0.325em !default;
   $gradientcolor2: scale-color($color, $lightness: 10%);
 
   padding: 0 0 $codeblock-padding $codeblock-padding;
-  border: 0.065em solid;
+  border: 1px solid;
   border-color: $color;
-  border-radius: 0.26em;
+  border-radius: 4px;
 
-  margin: 0.975em 0.325em 0.65em 0;
+  margin: 15px 5px 10px 0;
 
   h2 {
     padding-top: $codeblock-padding;
     padding-bottom: $codeblock-padding;
-    font-size: 1.3em;
+    font-size: 20px;
     background: linear-gradient(to bottom, $gradientcolor1, $gradientcolor2);
     border-color: $color;
-    margin-top: 0em;
+    margin-top: 0px;
     margin-left: -$codeblock-padding; // to move back to the left margin of the enclosing blockquote
   }
   h2:before {
@@ -195,7 +212,7 @@ $codeblock-padding: 0.325em !default;
 .prereq h3,
 .solution h3,
 .testimonial h3 {
-font-size: 1.17em;
+font-size: 18px;
 }
 
 .challenge    { background-color: #eec27520; }
@@ -210,7 +227,7 @@ font-size: 1.17em;
 .testimonial  { background-color: #fc8dc120; }
 
 blockquote p {
-    margin: 0.325em;
+    margin: 5px;
 }
 blockquote :not(h2) + p {
     padding-top: 1em;
@@ -242,35 +259,30 @@ a:visited {
 
 code {
   white-space: nowrap;
-  padding: 0.13em 0.325em;
+  padding: 2px 5px;
   color: #24292e;
   background-color: #e7e7e7;
 }
 
 samp { hyphens: none; }
 
-dt { margin-top: 1.3em; }
+dt { margin-top: 20px; }
 dd { margin-left: 2em; }
 
 article img {
     display: block;
-    margin: 1.3em auto;
+    margin: 20px auto;
     max-width: 100%;
 }
 
-article img.inline {
-    display: inline-block;
-    margin: auto;
-}
-
 article h2 {
-  margin: 3.12em 0 1.04em;
-  border-bottom: solid 0.065em #eaecef;
+  margin: 48px 0 16px;
+  border-bottom: solid 1px #eaecef;
   padding-bottom: 0.3em;
   line-height: 1.25;
 }
 
-article h3 { margin: 2.6em 0 1.04em; }
+article h3 { margin: 40px 0 16px; }
 
 article pre {
     margin: 0;
@@ -278,10 +290,19 @@ article pre {
 }
 
 //----------------------------------------
+// Some MathJax classes.
+//----------------------------------------
+
+.math-center {
+    text-align: center;
+}
+
+
+//----------------------------------------
 // Miscellaneous.
 //----------------------------------------
 
-.figures h2 { margin-top: 6.5em; }
+.figures h2 { margin-top: 100px; }
 
 .maintitle {
   text-align: center;
@@ -295,16 +316,16 @@ footer .license,
 footer .help-links
 {
     font-size: inherit;
-    margin-top: 0.65em;
-    margin-bottom: 0.65em;
+    margin-top: 10px;
+    margin-bottom: 10px;
     font-weight: 500;
     line-height: 1.1;
 }
 
 img.navbar-logo {
-  height: 2.6em; // synchronize with height of navbar
-  padding-top: 0.325em;
-  padding-right: 0.65em;
+  height: 40px; // synchronize with height of navbar
+  padding-top: 5px;
+  padding-right: 10px;
 }
 
 div.branding {
@@ -321,19 +342,10 @@ span.fold-unfold {
   opacity: 0.5;
 }
 
-/*
-  Force a pixelated rendering of images when original resolution is bigger than
-  the <img> viewport to avoid a blurring effect that makes it difficult to read the image.
-  This issue affects primarily Chrome based browsers (as of 2021).
-  See https://github.com/carpentries/styles/pull/636 for the original report and related links 
-*/
-img {
-  image-rendering: pixelated;
-}
 
 p.image-with-shadow img,
 img.image-with-shadow {
-  box-shadow: 0 0.39em 1.56em 0 #888;
+  box-shadow: 0 6px 24px 0 #888;
 }
 
 //----------------------------------------
@@ -347,7 +359,7 @@ div.life-cycle {
     z-index: 100;
     font-size: 1.2em;
     text-align: center;
-    margin-bottom: -0.065em;
+    margin-bottom: -1px;
     border-radius: 0;
 }
 
@@ -366,11 +378,6 @@ div.life-cycle {
     background: #d9edf7;
 }
 
-.published {
-    color: #354711;
-    background: #effbd7;
-}
-
 // Remove border around spans of text within code blocks
 // that the highlighter (rouge) failed to recognize.
 pre.highlight span.err {
@@ -387,24 +394,88 @@ kbd {
     margin: 0 .1em;
     padding: .1em .6em;
     font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
-    font-size: 0.715em;
+    font-size: 11px;
     line-height: 1.4;
     color: #242729;
-    text-shadow: 0 0.065em 0 #FFF;
+    text-shadow: 0 1px 0 #FFF;
     background-color: #e1e3e5;
-    border: 0.065em solid #adb3b9;
-    border-radius: 0.195em;
-    box-shadow: 0 0.065em 0 rgba(12,13,14,0.2), 0 0 0 0.13em #FFF inset;
+    border: 1px solid #adb3b9;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(12,13,14,0.2), 0 0 0 2px #FFF inset;
     white-space: nowrap;
     font-style: normal;
 }
 
-//------------------------------------------
-// Show solution while printing (Ctrl + P)
-// -----------------------------------------
+// ----------------------------------------
+// CSS for Toogle Switch
+// https://www.w3schools.com/howto/howto_css_switch.asp
+// ----------------------------------------
 
-@media print {
-  blockquote.solution > * {
-    display: unset !important;
-  }
-}
+    /* The switch - the box around the slider */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 30px;
+      height: 17px;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    /* The slider */
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 13px;
+      width: 13px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+      -webkit-transform: translateX(13px);
+      -ms-transform: translateX(13px);
+      transform: translateX(13px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 17px;
+    }
+    .slider.round:before {
+      border-radius: 50%;
+    }
+
+    /* CSS to position the toggle-switch in the navbar */
+    .navbar-nav > li > div {
+      padding-top: 16px;
+      padding-bottom: 10px;
+      line-height: 20px;
+    }
