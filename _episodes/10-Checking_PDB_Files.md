@@ -77,8 +77,7 @@ Let's select only protein atoms and save them in a new file called "protein.pdb"
 
 Load vmd module and start the program:
 ~~~
-ml StdEnv/2020 vmd
-vmd
+singularity exec --nv /app/vmd1.9.4.sif vmd
 ~~~
 {: .language-bash}
 
@@ -181,20 +180,18 @@ For simulation preparation with the AMBER `tleap` program, cross-linked cysteine
 [Check_structure](https://pypi.org/project/biobb-structure-checking/) is a command-line utility from [BioBB project](https://github.com/bioexcel/biobb) for exhaustive structure quality checking (residue chirality, amide orientation, vdw clashes, etc.).  Using this utility, you can perform manipulations with structures, such as selecting chains or conformations, removing components, mutating residues, adding missing atoms, adding hydrogens, etc.  
 
 Installation
+Assume you already activate conda for workshop.
 ~~~
-~/workshop/scripts/install_check_structure.sh 
+conda install -c bioconda "biobb_structure_checking"
 ~~~
 {: .language-bash}
 
 Usage
 ~~~
-module load StdEnv/2020 python/3.10
-source ~/env-biobb/bin/activate
 
 # get help on commands:
 check_structure commands 
 cd ~/workshop/pdb/1ERT
-check_structure -i 1ERT.pdb checkall
 check_structure -i 1ERT.pdb -o output.pdb altloc --select A20:A,A43:B,A90:B 
 ~~~
 {: .language-bash}
